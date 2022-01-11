@@ -18,13 +18,17 @@
   ],
   "rules": {
     "prettier/prettier": "error",
-    "import/order": 2,
     "@typescript-eslint/explicit-function-return-type": 0,
     "@typescript-eslint/no-empty-function": 0,
     "@typescript-eslint/no-non-null-assertion": 0,
     "@typescript-eslint/camelcase": 0,
     "@typescript-eslint/no-explicit-any": 2,
-    "@typescript-eslint/no-unused-vars": 2,
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "_"
+      }
+    ],
     "no-use-before-define": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "space-before-function-paren": "off",
@@ -32,6 +36,8 @@
     "indent": "off",
     "camelcase": "off",
     "multiline-ternary": "off",
+    "brace-style": "off",
+    "no-useless-constructor": "off",
     "comma-dangle": [
       "error",
       {

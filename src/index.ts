@@ -1,4 +1,4 @@
 import 'dotenv/config'
-import './config/module-alias'
+import 'reflect-metadata'
 
 import './app'
