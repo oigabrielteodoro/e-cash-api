@@ -1,9 +1,9 @@
 import { getRepository, Repository } from 'typeorm'
 
 import { Session } from '@/app/core/users/infra/entities'
-import { SessionsHandler } from '@/app/core/users/types'
+import { SessionsRepositoryProvider } from '@/app/core/users/types'
 
-class SessionsRepository implements SessionsHandler {
+class SessionsRepository implements SessionsRepositoryProvider {
   private ormRepository: Repository<Session>
 
   constructor() {

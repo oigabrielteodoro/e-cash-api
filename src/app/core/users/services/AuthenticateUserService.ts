@@ -4,8 +4,8 @@ import { AppError } from '@/lib/errors'
 import {
   AuthenticateResponse,
   AuthenticateUser,
-  SessionsHandler,
-  UsersHandler,
+  SessionsRepositoryProvider,
+  UsersRepositoryProvider,
 } from '@/app/core/users/types'
 import { HashProvider } from '@/app/providers/HashProvider/types'
 import { AuthProvider } from '@/app/providers/AuthProvider/types'
@@ -14,10 +14,10 @@ import { AuthProvider } from '@/app/providers/AuthProvider/types'
 class AuthenticateUserService {
   constructor(
     @inject('UsersRepository')
-    private usersRepository: UsersHandler,
+    private usersRepository: UsersRepositoryProvider,
 
     @inject('SessionsRepository')
-    private sessionsRepository: SessionsHandler,
+    private sessionsRepository: SessionsRepositoryProvider,
 
     @inject('HashProvider')
     private hashProvider: HashProvider,

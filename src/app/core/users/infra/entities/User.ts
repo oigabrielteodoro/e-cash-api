@@ -4,9 +4,12 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   Column,
+  OneToOne,
+  JoinColumn,
 } from 'typeorm'
 
 import { Exclude } from 'class-transformer'
+import { Profile } from '.'
 
 @Entity('users')
 export class User {
@@ -19,6 +22,13 @@ export class User {
   @Exclude()
   @Column()
   password: string
+
+  @Column()
+  profile_id?: string
+
+  @OneToOne(() => Profile, (profile) => profile.user, { cascade: true })
+  @JoinColumn({ name: 'profile_id', referencedColumnName: 'id' })
+  profile?: Profile
 
   @CreateDateColumn()
   created_at: Date

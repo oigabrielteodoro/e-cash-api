@@ -8,7 +8,7 @@ import { FakeAuthProvider } from '@/app/providers/AuthProvider/fakes/FakeAuthPro
 
 import { AuthenticateUserService } from './AuthenticateUserService'
 
-describe('CreateUserService', () => {
+describe('AuthenticateUserService', () => {
   let fakeUsersRepository: FakeUsersRepository
   let fakeSessionsRepository: FakeSessionsRepository
   let fakeHashProvider: FakeHashProvider
@@ -29,12 +29,14 @@ describe('CreateUserService', () => {
   })
 
   it('should be able authenticate user successfully', async () => {
+    const full_name = 'Example'
     const email = 'example@domoney.com'
     const password = '123456'
 
     const data = {
       email,
       password,
+      full_name,
     }
 
     const user = await fakeUsersRepository.create(data)
@@ -45,12 +47,14 @@ describe('CreateUserService', () => {
   })
 
   it('should not be able authenticate user when email/password is invalid', async () => {
+    const full_name = 'Example'
     const email = 'example@domoney.com'
     const password = '123456'
 
     await fakeUsersRepository.create({
       email,
       password,
+      full_name,
     })
 
     await expect(

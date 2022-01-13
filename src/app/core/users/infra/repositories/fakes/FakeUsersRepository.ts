@@ -1,22 +1,30 @@
 import { v4 as uuid } from 'uuid'
 
 import { User } from '@/app/core/users/infra/entities'
-import { CreateUser, UsersHandler } from '@/app/core/users/types'
+import { CreateUser, UsersRepositoryProvider } from '@/app/core/users/types'
 
-class FakeUsersRepository implements UsersHandler {
+class FakeUsersRepository implements UsersRepositoryProvider {
   private users: User[]
 
   constructor() {
     this.users = []
   }
 
-  public async create({ email, password }: CreateUser): Promise<User> {
+  public async create({
+    email,
+    password,
+    full_name,
+  }: CreateUser): Promise<User> {
     const user = new User()
 
     Object.assign(user, {
       id: uuid(),
       email,
       password,
+      profile: {
+        id: uuid(),
+        full_name,
+      },
       created_at: new Date(),
       updated_at: new Date(),
     })

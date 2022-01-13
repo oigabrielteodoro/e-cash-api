@@ -1,9 +1,9 @@
 import { v4 as uuid } from 'uuid'
 
 import { Session } from '@/app/core/users/infra/entities'
-import { SessionsHandler } from '@/app/core/users/types'
+import { SessionsRepositoryProvider } from '@/app/core/users/types'
 
-class FakeSessionsRepository implements SessionsHandler {
+class FakeSessionsRepository implements SessionsRepositoryProvider {
   private sessions: Session[]
 
   constructor() {

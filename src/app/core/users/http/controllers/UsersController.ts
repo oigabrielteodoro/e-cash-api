@@ -9,7 +9,7 @@ class UsersController {
     response: Response,
     next: NextFunction,
   ): Promise<Response | void> {
-    const { email, password } = request.body
+    const { email, full_name, password } = request.body
 
     const createUser = container.resolve(CreateUserService)
 
@@ -17,6 +17,7 @@ class UsersController {
       const user = await createUser.execute({
         email,
         password,
+        full_name,
       })
 
       return response.json({

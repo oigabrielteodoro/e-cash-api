@@ -19,28 +19,35 @@ describe('CreateUserService', () => {
   })
 
   it('should be able create user successfully', async () => {
+    const full_name = 'Example'
     const email = 'example@domoney.com'
+    const password = '123456'
 
     const user = await createUserService.execute({
       email,
-      password: '123456',
+      full_name,
+      password,
     })
 
     expect(user.email).toBe(email)
   })
 
   it('should not be able create user when email already exists', async () => {
+    const full_name = 'Example'
     const email = 'example@domoney.com'
+    const password = '123456'
 
     await fakeUsersRepository.create({
       email,
-      password: '123456',
+      full_name,
+      password,
     })
 
     await expect(
       createUserService.execute({
         email,
-        password: '123456',
+        full_name,
+        password,
       }),
     ).rejects.toBeInstanceOf(AppError)
   })
