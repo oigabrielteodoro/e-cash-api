@@ -1,6 +1,6 @@
 import { injectable, inject } from 'tsyringe'
 
-import { AppError, convertBodyFromUndefined } from '@/lib'
+import { AppError, removeUndefinedValuesInObject } from '@/lib'
 import { User } from '@/app/core/users/infra/entities'
 import { UpdateUser, UsersRepositoryProvider } from '@/app/core/users/types'
 
@@ -20,10 +20,10 @@ class UpdateUserProfileService {
       throw new AppError('Invalid user. Please try again', 404)
     }
 
-    const convertedData = convertBodyFromUndefined(data)
+    const profile = removeUndefinedValuesInObject(data)
 
     if (userById.profile) {
-      Object.assign(userById.profile, convertedData)
+      Object.assign(userById.profile, profile)
     }
 
     await this.usersRepository.save(userById)

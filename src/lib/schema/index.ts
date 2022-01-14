@@ -34,3 +34,7 @@ export const validParamsBySchema =
   <T extends ObjectShape>(schema: ObjectSchema<T>) =>
   async (request: Request, response: Response, next: NextFunction) =>
     validBySchema(schema, 'params')(request, response, next)
+
+export function removeUndefinedValuesInObject<T, E>(receivedBody: T): E {
+  return JSON.parse(JSON.stringify(receivedBody))
+}

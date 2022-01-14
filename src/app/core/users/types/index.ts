@@ -45,7 +45,3 @@ export const updateUserProfileSchema = yup.object().shape({
   financial_objective: yup.string(),
   like_be_called: yup.string(),
 })
-
-export const updateUserProfileParamsSchema = yup.object().shape({
-  user_id: yup.string().uuid().required(),
-})

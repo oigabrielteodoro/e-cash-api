@@ -9,7 +9,7 @@ class ProfileController {
     response: Response,
     next: NextFunction,
   ): Promise<Response | void> {
-    const { user_id } = request.params
+    const user_id = request.user_id
     const { like_be_called, full_name, financial_objective } = request.body
 
     const updateUserProfile = container.resolve(UpdateUserProfileService)
