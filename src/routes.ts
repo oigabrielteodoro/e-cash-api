@@ -6,3 +6,5 @@ export const UPDATE_USER_PROFILE = `${BASE_URL}/users/profile`
 
 export const LIST_BANK_ACCOUNTS = `${BASE_URL}/bank_accounts`
 export const CREATE_BANK_ACCOUNT = `${BASE_URL}/bank_accounts`
+
+export const CREATE_CATEGORY = `${BASE_URL}/categories`
