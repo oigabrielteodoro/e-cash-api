@@ -1,3 +1,4 @@
+import { Joi } from 'celebrate'
 import { BankAccount } from '@/app/core/bank_accounts/infra/entities/BankAccount'
 
 export type CreateBankAccount = Omit<
@@ -21,4 +22,13 @@ export enum BankAccountType {
   INVESTMENTS = 'INVESTMENTS',
   PAYMENT_ACCOUNT = 'PAYMENT_ACCOUNT',
   OTHERS = 'OTHERS',
+}
+
+export const createBankAccountSchema = {
+  name: Joi.string().required(),
+  balance: Joi.string().required(),
+  description: Joi.string().optional(),
+  bank_flag: Joi.string().required(),
+  include_sum_main_screen: Joi.bool().required(),
+  account_type: Joi.string().required(),
 }

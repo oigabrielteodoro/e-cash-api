@@ -1,5 +1,6 @@
 import express from 'express'
 import cors from 'cors'
+import { errors as celebrateErrors } from 'celebrate'
 
 import { router } from './app/router'
 import { getErrors } from './lib/errors'
@@ -15,10 +16,11 @@ const app = express()
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-
 app.use(cors())
+
 app.use(router)
 
+app.use(celebrateErrors())
 app.use(getErrors)
 
 app.listen(PORT, () => {

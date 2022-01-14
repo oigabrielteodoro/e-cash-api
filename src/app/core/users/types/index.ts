@@ -1,5 +1,5 @@
-import * as yup from 'yup'
 import { FindOneOptions } from 'typeorm'
+import { Joi } from 'celebrate'
 
 import { User, Session, Profile } from '@/app/core/users/infra/entities'
 
@@ -29,19 +29,19 @@ export type AuthenticateResponse = {
   token: string
 }
 
-export const createUserSchema = yup.object().shape({
-  email: yup.string().email().required(),
-  password: yup.string().required(),
-  full_name: yup.string().required(),
-})
+export const createUserSchema = {
+  email: Joi.string().email().required(),
+  password: Joi.string().required(),
+  full_name: Joi.string().required(),
+}
 
-export const authenticateUserSchema = yup.object().shape({
-  email: yup.string().email().required(),
-  password: yup.string().required(),
-})
+export const authenticateUserSchema = {
+  email: Joi.string().email().required(),
+  password: Joi.string().required(),
+}
 
-export const updateUserProfileSchema = yup.object().shape({
-  full_name: yup.string(),
-  financial_objective: yup.string(),
-  like_be_called: yup.string(),
-})
+export const updateUserProfileSchema = {
+  full_name: Joi.string(),
+  financial_objective: Joi.string(),
+  like_be_called: Joi.string(),
+}
