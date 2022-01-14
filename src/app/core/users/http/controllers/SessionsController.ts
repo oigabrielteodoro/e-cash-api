@@ -14,7 +14,7 @@ class SessionsController {
     const authenticateUser = container.resolve(AuthenticateUserService)
 
     try {
-      const { token, user } = await authenticateUser.execute({
+      const { token, user, session_id } = await authenticateUser.execute({
         email,
         password,
       })
@@ -22,6 +22,7 @@ class SessionsController {
       return response.json({
         user,
         token,
+        session_id,
       })
     } catch (error) {
       return next(error)

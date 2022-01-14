@@ -27,6 +27,7 @@ export type SessionsRepositoryProvider = {
 export type AuthenticateResponse = {
   user: Omit<User, 'password'>
   token: string
+  session_id: string
 }
 
 export const createUserSchema = {

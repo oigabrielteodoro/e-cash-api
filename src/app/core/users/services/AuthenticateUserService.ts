@@ -44,13 +44,16 @@ class AuthenticateUserService {
 
     const token = this.authProvider.generateToken(userByEmail.id)
 
-    await this.sessionsRepository.create(userByEmail.id)
+    const { id: session_id } = await this.sessionsRepository.create(
+      userByEmail.id,
+    )
 
     delete userByEmail.password
 
     return {
       user: userByEmail,
       token,
+      session_id,
     }
   }
 }
