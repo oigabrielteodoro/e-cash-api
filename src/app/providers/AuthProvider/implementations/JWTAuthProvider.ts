@@ -18,7 +18,7 @@ class JWTAuthProvider implements AuthProvider {
 
       return sub
     } catch {
-      throw new AppError('Invalid token. Please create new session.', 401)
+      throw new AppError('Invalid token. Please try again.', 401)
     }
   }
 }

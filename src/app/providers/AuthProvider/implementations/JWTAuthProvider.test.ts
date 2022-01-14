@@ -3,6 +3,7 @@ import { v4 as uuid } from 'uuid'
 import { AuthProvider } from '@/app/providers/AuthProvider/types'
 
 import { JWTAuthProvider } from './JWTAuthProvider'
+import { AppError } from '@/lib'
 
 describe('JWTAuthProvider', () => {
   let authProvider: AuthProvider
@@ -29,5 +30,13 @@ describe('JWTAuthProvider', () => {
     const decoded = authProvider.verifyToken(token)
 
     expect(decoded).toBe(user_id)
+  })
+
+  it('should not be able valid token when token is invalid', async () => {
+    await expect(
+      new Promise((resolve) =>
+        resolve(authProvider.verifyToken('wrong-token')),
+      ),
+    ).rejects.toEqual(new AppError('Invalid token. Please try again.', 401))
   })
 })

@@ -46,7 +46,7 @@ describe('verityAuthentication', () => {
           ),
         ),
       ),
-    ).rejects.toBeInstanceOf(AppError)
+    ).rejects.toEqual(new AppError('JWT token is missing', 404))
   })
 
   it('return error when token is invalid', async () => {
@@ -66,6 +66,6 @@ describe('verityAuthentication', () => {
           ),
         ),
       ),
-    ).rejects.toBeInstanceOf(AppError)
+    ).rejects.toEqual(new AppError('Invalid token. Please try again.', 401))
   })
 })
