@@ -5,6 +5,7 @@ import {
   FindCategoryByName,
   CategoriesRepositoryProvider,
   CreateCategory,
+  FindCategoryById,
 } from '@/app/core/categories/types'
 
 class FakeCategoriesRepository implements CategoriesRepositoryProvider {
@@ -36,6 +37,16 @@ class FakeCategoriesRepository implements CategoriesRepositoryProvider {
     const categoriesByUser = await this.findAllByUserId(user_id)
 
     return categoriesByUser.find((category) => category.name === name)
+  }
+
+  public async findById({ user_id, category_id }: FindCategoryById) {
+    const categoriesByUser = await this.findAllByUserId(user_id)
+
+    return categoriesByUser.find((category) => category.id === category_id)
+  }
+
+  public async deleteById(id: string) {
+    this.categories = this.categories.filter((category) => category.id !== id)
   }
 }
 

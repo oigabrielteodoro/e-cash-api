@@ -5,6 +5,7 @@ import {
   FindCategoryByName,
   CategoriesRepositoryProvider,
   CreateCategory,
+  FindCategoryById,
 } from '@/app/core/categories/types'
 
 class CategoriesRepository implements CategoriesRepositoryProvider {
@@ -34,6 +35,19 @@ class CategoriesRepository implements CategoriesRepositoryProvider {
     return this.ormRepository.findOne({
       where: options,
     })
+  }
+
+  public async findById({ category_id, user_id }: FindCategoryById) {
+    return this.ormRepository.findOne({
+      where: {
+        id: category_id,
+        user_id,
+      },
+    })
+  }
+
+  public async deleteById(id: string) {
+    this.ormRepository.delete(id)
   }
 }
 
