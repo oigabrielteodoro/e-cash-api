@@ -1,9 +1,26 @@
 import { container } from 'tsyringe'
 import { Request, Response, NextFunction } from 'express'
 
-import { CreateCategoryService } from '@/app/core/categories/services/CreateCategoryService'
+import {
+  CreateCategoryService,
+  ListCategoriesService,
+} from '@/app/core/categories/services'
 
 class CategoriesController {
+  public async index(request: Request, response: Response, next: NextFunction) {
+    const { user_id } = request
+
+    const listCategories = container.resolve(ListCategoriesService)
+
+    try {
+      const categories = await listCategories.execute(user_id)
+
+      return response.json(categories)
+    } catch (error) {
+      return next(error)
+    }
+  }
+
   public async create(
     request: Request,
     response: Response,

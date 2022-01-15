@@ -1,7 +1,7 @@
 import { Router } from 'express'
 
 import { validBodyBySchema } from '@/lib'
-import { CREATE_CATEGORY } from '@/routes'
+import { CREATE_CATEGORY, LIST_CATEGORIES } from '@/routes'
 import { verifyAuthentication } from '@/app/interceptors'
 import { AuthProviderInstance } from '@/app/providers/AuthProvider'
 
@@ -13,6 +13,7 @@ const categoriesController = new CategoriesController()
 
 router.use(verifyAuthentication(new AuthProviderInstance()))
 
+router.get(LIST_CATEGORIES, categoriesController.index)
 router.post(
   CREATE_CATEGORY,
   validBodyBySchema(createCategorySchema),
