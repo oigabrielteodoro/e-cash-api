@@ -21,7 +21,7 @@ class CreateCategoryService {
     const userById = await this.usersRepository.findById(user_id)
 
     if (!userById) {
-      throw new AppError('Invalid user. Please try again.', 404)
+      throw new AppError('Invalid user.', 404)
     }
 
     const categoryByName = await this.categoriesRepository.findByName({

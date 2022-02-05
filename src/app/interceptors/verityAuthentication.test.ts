@@ -66,6 +66,6 @@ describe('verityAuthentication', () => {
           ),
         ),
       ),
-    ).rejects.toEqual(new AppError('Invalid token. Please try again.', 401))
+    ).rejects.toEqual(new AppError('Invalid token.', 401))
   })
 })

@@ -13,7 +13,7 @@ export const verifyAuthentication =
     }
 
     if (!authorization.includes(' ')) {
-      throw new AppError('Invalid token. Please try again.', 401)
+      throw new AppError('Invalid token.', 401)
     }
 
     const [, token] = authorization.split(' ')
