@@ -17,7 +17,7 @@ class UpdateUserProfileService {
     })
 
     if (!userById) {
-      throw new AppError('Invalid user. Please try again', 404)
+      throw new AppError('Invalid user.', 404)
     }
 
     const profile = removeUndefinedValuesInObject(data)

@@ -11,9 +11,9 @@ import { categoriesRouter } from '@/app/core/categories/http/router'
 
 const router = Router()
 
+router.use(sessionsRouter)
 router.use(usersRouter)
 router.use(profileRouter)
-router.use(sessionsRouter)
 router.use(categoriesRouter)
 router.use(bankAccountsRouter)
 

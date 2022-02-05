@@ -46,6 +46,6 @@ describe('ListCategoriesService', () => {
   it('should not be able list categories when user is invalid', async () => {
     await expect(
       listCategoriesService.execute('wrong-user-id'),
-    ).rejects.toEqual(new AppError('Invalid user. Please try again.', 404))
+    ).rejects.toEqual(new AppError('Invalid user.', 404))
   })
 })
