@@ -4,6 +4,7 @@ import { NextFunction, Request, Response } from 'express'
 import {
   AuthenticateUserService,
   RenewSessionUserService,
+  LogOutUserService,
 } from '@/app/core/users/services'
 
 export class SessionsController {
@@ -50,6 +51,30 @@ export class SessionsController {
       return response.json({
         token,
       })
+    } catch (error) {
+      return next(error)
+    }
+  }
+
+  public async delete(
+    request: Request,
+    response: Response,
+    next: NextFunction,
+  ): Promise<Response | void> {
+    const {
+      user_id,
+      params: { session_id },
+    } = request
+
+    const logOutUser = container.resolve(LogOutUserService)
+
+    try {
+      await logOutUser.execute({
+        user_id,
+        session_id,
+      })
+
+      return response.status(200).send()
     } catch (error) {
       return next(error)
     }

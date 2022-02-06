@@ -1,9 +1,11 @@
 import { Router } from 'express'
 
-import { CREATE_SESSION, UPDATE_SESSION } from '@/routes'
-import { validBodyBySchema } from '@/lib/schema'
+import { CREATE_SESSION, DELETE_SESSION, UPDATE_SESSION } from '@/routes'
+import { validBodyBySchema, validParamsBySchema } from '@/lib/schema'
+import { verifyAuthentication } from '@/app/interceptors'
 import {
   authenticateUserSchema,
+  logOutUserSchema,
   renewSessionUserSchema,
 } from '@/app/core/users/types'
 
@@ -22,6 +24,13 @@ router.put(
   UPDATE_SESSION,
   validBodyBySchema(renewSessionUserSchema),
   sessionsController.update,
+)
+
+router.delete(
+  DELETE_SESSION,
+  validParamsBySchema(logOutUserSchema),
+  verifyAuthentication,
+  sessionsController.delete,
 )
 
 export { router as sessionsRouter }

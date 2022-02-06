@@ -3,6 +3,8 @@ export const BASE_URL = '/api'
 export const CREATE_USER = `${BASE_URL}/users`
 export const UPDATE_SESSION = `${BASE_URL}/refresh`
 export const CREATE_SESSION = `${BASE_URL}/sessions`
+export const DELETE_SESSION = `${BASE_URL}/sessions/:session_id`
+
 export const SHOW_USER_PROFILE = `${BASE_URL}/profile`
 export const UPDATE_USER_PROFILE = `${BASE_URL}/profile`
 
