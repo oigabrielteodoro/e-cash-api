@@ -1,4 +1,5 @@
 export * from './CreateUserService'
 export * from './AuthenticateUserService'
 export * from './UpdateUserProfileService'
+export * from './RenewSessionUserService'
 export * from './ShowUserService'

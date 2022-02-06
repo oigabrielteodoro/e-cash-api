@@ -62,13 +62,17 @@ describe('AuthenticateUserService', () => {
         email,
         password: 'wrong-password',
       }),
-    ).rejects.toEqual(new AppError('Invalid email/password.', 401))
+    ).rejects.toEqual(
+      new AppError('user.credentials.invalid', 'Invalid email/password.', 401),
+    )
 
     await expect(
       authenticateUserService.execute({
         email: 'wrong-email',
         password: 'wrong-password',
       }),
-    ).rejects.toEqual(new AppError('Invalid email/password.', 401))
+    ).rejects.toEqual(
+      new AppError('user.credentials.invalid', 'Invalid email/password.', 401),
+    )
   })
 })

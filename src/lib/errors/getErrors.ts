@@ -10,7 +10,7 @@ export function getErrors(
 ) {
   if (err instanceof AppError) {
     return response.status(err.statusCode).json({
-      status: 'error',
+      status: err.id,
       message: err.message,
       code: err.statusCode,
     })

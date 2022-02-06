@@ -19,13 +19,17 @@ class CreateBankAccountService {
 
   public async execute({ user_id, name, balance, ...rest }: CreateBankAccount) {
     if (!isValidNumber(balance)) {
-      throw new AppError('Invalid balance. Use only numbers', 422)
+      throw new AppError(
+        'bank_account.balance.invalid',
+        'Invalid balance. Use only numbers',
+        422,
+      )
     }
 
     const userById = await this.usersRepository.findById(user_id)
 
     if (!userById) {
-      throw new AppError('Invalid user.', 404)
+      throw new AppError('user.invalid', 'Invalid user.', 404)
     }
 
     const bankAccountByName = await this.bankAccountsRepository.findByName(
@@ -34,7 +38,11 @@ class CreateBankAccountService {
     )
 
     if (bankAccountByName) {
-      throw new AppError('Already exists bank account with name!', 409)
+      throw new AppError(
+        'bank_account.name.in_use',
+        'Already exists bank account with name!',
+        409,
+      )
     }
 
     const bankAccount = await this.bankAccountsRepository.create({

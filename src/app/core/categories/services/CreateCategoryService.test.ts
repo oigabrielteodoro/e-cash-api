@@ -53,7 +53,7 @@ describe('CreateCategoryService', () => {
         name,
         description,
       }),
-    ).rejects.toEqual(new AppError('Invalid user.', 404))
+    ).rejects.toEqual(new AppError('user.invalid', 'Invalid user.', 404))
   })
 
   it('should not be able create category when user already exists category with name', async () => {
@@ -78,6 +78,12 @@ describe('CreateCategoryService', () => {
         name,
         description,
       }),
-    ).rejects.toEqual(new AppError('Already exists category with name!', 409))
+    ).rejects.toEqual(
+      new AppError(
+        'category.name.in_use',
+        'Already exists category with name!',
+        409,
+      ),
+    )
   })
 })

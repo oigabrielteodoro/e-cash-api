@@ -22,6 +22,7 @@ export type UsersRepositoryProvider = {
 
 export type SessionsRepositoryProvider = {
   create(user_id: string): Promise<Session>
+  findById(session_id: string): Promise<Session | undefined>
 }
 
 export type AuthenticateResponse = {
@@ -45,4 +46,9 @@ export const updateUserProfileSchema = {
   full_name: Joi.string(),
   financial_objective: Joi.string(),
   like_be_called: Joi.string(),
+}
+
+export const renewSessionUserSchema = {
+  user_id: Joi.string().uuid().required(),
+  session_id: Joi.string().uuid().required(),
 }

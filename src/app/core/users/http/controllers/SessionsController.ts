@@ -1,9 +1,12 @@
 import { container } from 'tsyringe'
 import { NextFunction, Request, Response } from 'express'
 
-import { AuthenticateUserService } from '@/app/core/users/services'
+import {
+  AuthenticateUserService,
+  RenewSessionUserService,
+} from '@/app/core/users/services'
 
-class SessionsController {
+export class SessionsController {
   public async create(
     request: Request,
     response: Response,
@@ -28,6 +31,27 @@ class SessionsController {
       return next(error)
     }
   }
-}
 
-export { SessionsController }
+  public async update(
+    request: Request,
+    response: Response,
+    next: NextFunction,
+  ): Promise<Response | void> {
+    const { user_id, session_id } = request.body
+
+    const renewSessionUser = container.resolve(RenewSessionUserService)
+
+    try {
+      const { token } = await renewSessionUser.execute({
+        user_id,
+        session_id,
+      })
+
+      return response.json({
+        token,
+      })
+    } catch (error) {
+      return next(error)
+    }
+  }
+}

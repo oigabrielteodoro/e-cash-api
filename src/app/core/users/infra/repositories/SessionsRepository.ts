@@ -20,6 +20,10 @@ class SessionsRepository implements SessionsRepositoryProvider {
 
     return session
   }
+
+  public async findById(session_id: string): Promise<Session | undefined> {
+    return this.ormRepository.findOne(session_id)
+  }
 }
 
 export { SessionsRepository }

@@ -17,11 +17,16 @@ class FakeSessionsRepository implements SessionsRepositoryProvider {
       id: uuid(),
       user_id,
       created_at: new Date(),
+      active: true,
     })
 
     this.sessions.push(session)
 
     return session
+  }
+
+  public async findById(session_id: string): Promise<Session | undefined> {
+    return this.sessions.find((session) => session.id === session_id)
   }
 }
 

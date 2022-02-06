@@ -30,7 +30,11 @@ class AuthenticateUserService {
     const userByEmail = await this.usersRepository.findByEmail(data.email)
 
     if (!userByEmail) {
-      throw new AppError('Invalid email/password.', 401)
+      throw new AppError(
+        'user.credentials.invalid',
+        'Invalid email/password.',
+        401,
+      )
     }
 
     const passwordIsMatch = await this.hashProvider.compareHash(
@@ -39,7 +43,11 @@ class AuthenticateUserService {
     )
 
     if (!passwordIsMatch) {
-      throw new AppError('Invalid email/password.', 401)
+      throw new AppError(
+        'user.credentials.invalid',
+        'Invalid email/password.',
+        401,
+      )
     }
 
     const token = this.authProvider.generateToken(userByEmail.id)

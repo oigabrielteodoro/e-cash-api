@@ -21,7 +21,7 @@ class DeleteCategoryService {
     const userById = await this.usersRepository.findById(user_id)
 
     if (!userById) {
-      throw new AppError('Invalid user.', 404)
+      throw new AppError('user.invalid', 'Invalid user.', 404)
     }
 
     const category = await this.categoriesRepository.findById({
@@ -31,6 +31,7 @@ class DeleteCategoryService {
 
     if (!category) {
       throw new AppError(
+        'category.invalid',
         'Invalid category. You to have create new category.',
         404,
       )

@@ -46,7 +46,9 @@ describe('verityAuthentication', () => {
           ),
         ),
       ),
-    ).rejects.toEqual(new AppError('JWT token is missing', 404))
+    ).rejects.toEqual(
+      new AppError('token.invalid', 'JWT token is missing', 404),
+    )
   })
 
   it('return error when token is invalid', async () => {
@@ -66,6 +68,6 @@ describe('verityAuthentication', () => {
           ),
         ),
       ),
-    ).rejects.toEqual(new AppError('Invalid token.', 401))
+    ).rejects.toEqual(new AppError('token.invalid', 'Invalid token.', 401))
   })
 })

@@ -8,7 +8,7 @@ class JWTAuthProvider implements AuthProvider {
   public generateToken(payload: string) {
     return sign({ id: payload }, this.JWT_SECRET, {
       subject: payload,
-      expiresIn: '1d',
+      expiresIn: '30m',
     })
   }
 
@@ -18,7 +18,7 @@ class JWTAuthProvider implements AuthProvider {
 
       return sub
     } catch {
-      throw new AppError('Invalid token.', 401)
+      throw new AppError('token.expired', 'Invalid token.', 401)
     }
   }
 }

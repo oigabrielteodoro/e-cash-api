@@ -24,7 +24,7 @@ class ShowUserService {
     })
 
     if (!userById) {
-      throw new AppError('Invalid user.', 404)
+      throw new AppError('user.invalid', 'Invalid user.', 404)
     }
 
     return {

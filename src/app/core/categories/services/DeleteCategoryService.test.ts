@@ -56,7 +56,7 @@ describe('DeleteCategoryService', () => {
         user_id: 'wrong-user-id',
         category_id: 'wrong-category-id',
       }),
-    ).rejects.toEqual(new AppError('Invalid user.', 404))
+    ).rejects.toEqual(new AppError('user.invalid', 'Invalid user.', 404))
   })
 
   it('should not be able delete category when id is invalid', async () => {
@@ -71,7 +71,11 @@ describe('DeleteCategoryService', () => {
         category_id: 'wrong-category-id',
       }),
     ).rejects.toEqual(
-      new AppError('Invalid category. You to have create new category.', 404),
+      new AppError(
+        'category.invalid',
+        'Invalid category. You to have create new category.',
+        404,
+      ),
     )
   })
 })

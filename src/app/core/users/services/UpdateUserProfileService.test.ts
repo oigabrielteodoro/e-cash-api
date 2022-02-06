@@ -41,6 +41,6 @@ describe('UpdateUserProfileService', () => {
         financial_objective,
         like_be_called,
       }),
-    ).rejects.toEqual(new AppError('Invalid user.', 404))
+    ).rejects.toEqual(new AppError('user.invalid', 'Invalid user.', 404))
   })
 })

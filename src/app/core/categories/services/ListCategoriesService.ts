@@ -18,7 +18,7 @@ class ListCategoriesService {
     const userById = await this.usersRepository.findById(user_id)
 
     if (!userById) {
-      throw new AppError('Invalid user.', 404)
+      throw new AppError('user.invalid', 'Invalid user.', 404)
     }
 
     const categories = await this.categoriesRepository.findAllByUserId(user_id)

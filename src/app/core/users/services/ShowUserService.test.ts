@@ -31,7 +31,7 @@ describe('ShowUserService', () => {
 
   it('should not be able return user when user_id is invalid', async () => {
     await expect(showUserService.execute('wrong-user-id')).rejects.toEqual(
-      new AppError('Invalid user.', 404),
+      new AppError('user.invalid', 'Invalid user.', 404),
     )
   })
 })

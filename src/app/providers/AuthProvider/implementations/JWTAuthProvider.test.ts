@@ -37,6 +37,6 @@ describe('JWTAuthProvider', () => {
       new Promise((resolve) =>
         resolve(authProvider.verifyToken('wrong-token')),
       ),
-    ).rejects.toEqual(new AppError('Invalid token.', 401))
+    ).rejects.toEqual(new AppError('token.expired', 'Invalid token.', 401))
   })
 })

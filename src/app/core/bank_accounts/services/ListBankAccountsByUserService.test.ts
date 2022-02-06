@@ -50,6 +50,6 @@ describe('ListBankAccountsByUserService', () => {
   it('should not be able list bank accounts when user is invalid', async () => {
     await expect(
       listBankAccountsService.execute('wrong-user-id'),
-    ).rejects.toEqual(new AppError('Invalid user.', 404))
+    ).rejects.toEqual(new AppError('user.invalid', 'Invalid user.', 404))
   })
 })

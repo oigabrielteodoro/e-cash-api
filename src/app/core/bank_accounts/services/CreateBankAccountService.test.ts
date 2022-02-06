@@ -74,7 +74,13 @@ describe('CreateBankAccountService', () => {
         user_id: 'wrong-user-id',
         description,
       }),
-    ).rejects.toEqual(new AppError('Invalid balance. Use only numbers', 422))
+    ).rejects.toEqual(
+      new AppError(
+        'bank_account.balance.invalid',
+        'Invalid balance. Use only numbers',
+        422,
+      ),
+    )
   })
 
   it('should not be able create bank account when user is invalid', async () => {
@@ -94,7 +100,7 @@ describe('CreateBankAccountService', () => {
         user_id: 'wrong-user-id',
         description,
       }),
-    ).rejects.toEqual(new AppError('Invalid user.', 404))
+    ).rejects.toEqual(new AppError('user.invalid', 'Invalid user.', 404))
   })
 
   it('should not be able create bank account when user already other bank account with name', async () => {
@@ -131,7 +137,11 @@ describe('CreateBankAccountService', () => {
         description,
       }),
     ).rejects.toEqual(
-      new AppError('Already exists bank account with name!', 409),
+      new AppError(
+        'bank_account.name.in_use',
+        'Already exists bank account with name!',
+        409,
+      ),
     )
   })
 })

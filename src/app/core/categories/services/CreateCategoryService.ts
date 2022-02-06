@@ -21,7 +21,7 @@ class CreateCategoryService {
     const userById = await this.usersRepository.findById(user_id)
 
     if (!userById) {
-      throw new AppError('Invalid user.', 404)
+      throw new AppError('user.invalid', 'Invalid user.', 404)
     }
 
     const categoryByName = await this.categoriesRepository.findByName({
@@ -30,7 +30,11 @@ class CreateCategoryService {
     })
 
     if (categoryByName) {
-      throw new AppError('Already exists category with name!', 409)
+      throw new AppError(
+        'category.name.in_use',
+        'Already exists category with name!',
+        409,
+      )
     }
 
     const category = await this.categoriesRepository.create({

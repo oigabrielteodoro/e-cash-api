@@ -50,7 +50,11 @@ describe('CreateUserService', () => {
         password,
       }),
     ).rejects.toEqual(
-      new AppError('Another user already exists using this email', 409),
+      new AppError(
+        'user.email.in_use',
+        'Another user already exists using this email',
+        409,
+      ),
     )
   })
 })

@@ -9,11 +9,11 @@ export const verifyAuthentication =
     const authorization = request.headers?.authorization
 
     if (!authorization) {
-      throw new AppError('JWT token is missing', 404)
+      throw new AppError('token.invalid', 'JWT token is missing', 404)
     }
 
     if (!authorization.includes(' ')) {
-      throw new AppError('Invalid token.', 401)
+      throw new AppError('token.invalid', 'Invalid token.', 401)
     }
 
     const [, token] = authorization.split(' ')
