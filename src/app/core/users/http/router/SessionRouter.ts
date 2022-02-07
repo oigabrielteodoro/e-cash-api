@@ -10,6 +10,7 @@ import {
 } from '@/app/core/users/types'
 
 import { SessionsController } from '@/app/core/users/http/controllers'
+import { AuthProviderInstance } from '@/app/providers/AuthProvider'
 
 const router = Router()
 const sessionsController = new SessionsController()
@@ -28,8 +29,8 @@ router.put(
 
 router.delete(
   DELETE_SESSION,
+  verifyAuthentication(new AuthProviderInstance()),
   validParamsBySchema(logOutUserSchema),
-  verifyAuthentication,
   sessionsController.delete,
 )
 
