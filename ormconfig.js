@@ -3,10 +3,10 @@ module.exports = {
   url: process.env.DATABASE_URL,
   entities: [process.env.DATABASE_ENTITIES],
   migrations: [process.env.DATABASE_MIGRATIONS],
-  ssl: true,
+  ssl: process.env.DATABASE_SSL,
   extra: {
     ssl: {
-      rejectUnauthorized: false,
+      rejectUnauthorized: process.env.DATABASE_SSL,
     },
   },
   cli: {
