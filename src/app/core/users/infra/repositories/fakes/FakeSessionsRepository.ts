@@ -28,6 +28,10 @@ class FakeSessionsRepository implements SessionsRepositoryProvider {
   public async findById(session_id: string): Promise<Session | undefined> {
     return this.sessions.find((session) => session.id === session_id)
   }
+
+  public async save(session: Session): Promise<Session> {
+    return session
+  }
 }
 
 export { FakeSessionsRepository }
