@@ -9,7 +9,14 @@ class UsersController {
     response: Response,
     next: NextFunction,
   ): Promise<Response | void> {
-    const { email, full_name, password } = request.body
+    const {
+      email,
+      full_name,
+      password,
+      financial_objective,
+      monthly_income,
+      like_be_called,
+    } = request.body
 
     const createUser = container.resolve(CreateUserService)
 
@@ -18,6 +25,9 @@ class UsersController {
         email,
         password,
         full_name,
+        financial_objective,
+        monthly_income,
+        like_be_called,
       })
 
       return response.json({

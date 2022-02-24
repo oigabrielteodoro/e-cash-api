@@ -26,6 +26,9 @@ class Profile {
   financial_objective?: string
 
   @Column()
+  monthly_income?: string
+
+  @Column()
   avatar_url?: string
 
   @UpdateDateColumn()
