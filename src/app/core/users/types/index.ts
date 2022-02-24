@@ -3,9 +3,11 @@ import { Joi } from 'celebrate'
 
 import { User, Session, Profile } from '@/app/core/users/infra/entities'
 
-export type CreateUser = {
-  full_name: string
-} & Pick<User, 'email' | 'password'>
+export type CreateUser = Pick<User, 'email' | 'password'> &
+  Pick<
+    Profile,
+    'full_name' | 'financial_objective' | 'monthly_income' | 'like_be_called'
+  >
 export type AuthenticateUser = Pick<User, 'email' | 'password'>
 export type UpdateUser = Omit<Profile, 'id' | 'user' | 'updated_at'>
 
@@ -36,6 +38,9 @@ export const createUserSchema = {
   email: Joi.string().email().required(),
   password: Joi.string().required(),
   full_name: Joi.string().required(),
+  financial_objective: Joi.string().required(),
+  monthly_income: Joi.string().required(),
+  like_be_called: Joi.string().required(),
 }
 
 export const authenticateUserSchema = {

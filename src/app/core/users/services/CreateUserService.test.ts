@@ -22,11 +22,17 @@ describe('CreateUserService', () => {
     const full_name = 'Example'
     const email = 'example@domoney.com'
     const password = '123456'
+    const like_be_called = 'Example'
+    const monthly_income = '1000'
+    const financial_objective = 'make_extra_income'
 
     const user = await createUserService.execute({
       email,
       full_name,
       password,
+      like_be_called,
+      monthly_income,
+      financial_objective,
     })
 
     expect(user.email).toBe(email)
@@ -36,7 +42,6 @@ describe('CreateUserService', () => {
     const full_name = 'Example'
     const email = 'example@domoney.com'
     const password = '123456'
-
     await fakeUsersRepository.create({
       email,
       full_name,

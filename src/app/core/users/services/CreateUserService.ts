@@ -35,6 +35,9 @@ class CreateUserService {
       email: data.email,
       password: passwordHashed,
       full_name: data.full_name,
+      like_be_called: data.like_be_called,
+      financial_objective: data.financial_objective,
+      monthly_income: data.monthly_income,
     })
 
     const user = { id, email }
