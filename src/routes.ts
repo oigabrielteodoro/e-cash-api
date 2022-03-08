@@ -15,4 +15,4 @@ export const LIST_CATEGORIES = `${BASE_URL}/categories`
 export const CREATE_CATEGORY = `${BASE_URL}/categories`
 export const DELETE_CATEGORY = `${BASE_URL}/categories/:category_id`
 
-export const LIST_BANKING_INSTITUTIONS = `${BASE_URL}/banking_institution_ids`
+export const LIST_BANKING_INSTITUTIONS = `${BASE_URL}/banking_institutions`
