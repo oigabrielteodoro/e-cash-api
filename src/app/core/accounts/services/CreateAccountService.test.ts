@@ -1,7 +1,7 @@
 import { AppError } from '@/lib'
 
 import { FakeUsersRepository } from '@/app/core/users/infra/repositories'
-import { AccountsRepository } from '@/app/core/accounts/infra/repositories'
+import { FakeAccountsRepository } from '@/app/core/accounts/infra/repositories'
 
 import { UsersRepositoryProvider } from '@/app/core/users/types'
 import { AccountsRepositoryProvider } from '@/app/core/accounts/types'
@@ -15,7 +15,7 @@ describe('CreateAccountService', () => {
 
   beforeEach(() => {
     fakeUsersRepository = new FakeUsersRepository()
-    fakeAccountsRepository = new AccountsRepository()
+    fakeAccountsRepository = new FakeAccountsRepository()
     createAccountService = new CreateAccountService(
       fakeUsersRepository,
       fakeAccountsRepository,
