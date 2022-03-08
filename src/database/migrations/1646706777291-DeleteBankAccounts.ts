@@ -1,7 +1,11 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm'
 
-export class CreateAccounts1642184345561 implements MigrationInterface {
+export class DeleteBankAccounts1646706777291 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.dropTable('bank_accounts')
+  }
+
+  public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
         name: 'bank_accounts',
@@ -71,9 +75,5 @@ export class CreateAccounts1642184345561 implements MigrationInterface {
         ],
       }),
     )
-  }
-
-  public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('bank_accounts')
   }
 }

@@ -3,4 +3,4 @@ import './AuthProvider'
 
 import '@/app/core/users'
 import '@/app/core/categories'
-import '@/app/core/bank_accounts'
+import '@/app/core/accounts'
