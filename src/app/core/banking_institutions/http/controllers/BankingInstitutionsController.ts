@@ -1,10 +1,13 @@
+import { container } from 'tsyringe'
 import { NextFunction, Request, Response } from 'express'
 
 import { ListBankingInstitutionsService } from '@/app/core/banking_institutions/services'
 
 class BankingInstitutionsController {
   public index(_: Request, response: Response, next: NextFunction) {
-    const listBankingInstitutions = new ListBankingInstitutionsService()
+    const listBankingInstitutions = container.resolve(
+      ListBankingInstitutionsService,
+    )
 
     try {
       const bankingInstitutions = listBankingInstitutions.execute()
