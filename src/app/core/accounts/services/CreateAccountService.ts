@@ -17,7 +17,16 @@ class CreateAccountService {
     private accountsRepository: AccountsRepositoryProvider,
   ) {}
 
-  public async execute({ user_id, name, balance, ...rest }: CreateAccount) {
+  public async execute({
+    user_id,
+    name,
+    balance,
+    agency_number,
+    account_number,
+    ...rest
+  }: CreateAccount) {
+    console.log(user_id)
+
     if (!isValidNumber(balance)) {
       throw new AppError(
         'account.balance.invalid',
@@ -43,10 +52,41 @@ class CreateAccountService {
       )
     }
 
+    const alreadyExistsAccountWithAgency = await this.accountsRepository.findBy(
+      {
+        user_id,
+        agency_number,
+      },
+    )
+
+    if (alreadyExistsAccountWithAgency) {
+      throw new AppError(
+        'account.name.in_use',
+        'Already exists bank account with agency!',
+        409,
+      )
+    }
+
+    const alreadyExistsAccountWithAccount =
+      await this.accountsRepository.findBy({
+        user_id,
+        account_number,
+      })
+
+    if (alreadyExistsAccountWithAccount) {
+      throw new AppError(
+        'account.name.in_use',
+        'Already exists bank account with account!',
+        409,
+      )
+    }
+
     const account = await this.accountsRepository.create({
       user_id,
       name,
       balance,
+      agency_number,
+      account_number,
       ...rest,
     })
 

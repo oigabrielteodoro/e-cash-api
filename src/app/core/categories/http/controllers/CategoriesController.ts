@@ -6,6 +6,7 @@ import {
   ListCategoriesService,
   DeleteCategoryService,
 } from '@/app/core/categories/services'
+import { toSnakeCaseWithObject } from '@/lib'
 
 class CategoriesController {
   public async index(request: Request, response: Response, next: NextFunction) {
@@ -27,12 +28,16 @@ class CategoriesController {
     response: Response,
     next: NextFunction,
   ) {
-    const { user_id, body } = request
+    const user_id = request.user_id
+    const body = toSnakeCaseWithObject(request.body)
 
     const createCategory = container.resolve(CreateCategoryService)
 
     try {
-      const category = await createCategory.execute({ user_id, ...body })
+      const category = await createCategory.execute({
+        user_id,
+        ...body,
+      })
 
       return response.json({ category })
     } catch (error) {
@@ -46,12 +51,15 @@ class CategoriesController {
     next: NextFunction,
   ) {
     const { user_id, params } = request
-    const { category_id } = params
+    const { category_id } = toSnakeCaseWithObject(params)
 
     const deleteCategory = container.resolve(DeleteCategoryService)
 
     try {
-      await deleteCategory.execute({ user_id, category_id })
+      await deleteCategory.execute({
+        user_id,
+        category_id,
+      })
 
       return response.send()
     } catch (error) {

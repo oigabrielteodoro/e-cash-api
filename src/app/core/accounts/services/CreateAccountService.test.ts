@@ -27,8 +27,8 @@ describe('CreateAccountService', () => {
     const balance = '5000'
     const banking_institution_id = '240'
     const category = 'Money'
-    const banking_agency = '0000'
-    const banking_account = '0000001'
+    const agency_number = '0000'
+    const account_number = '0000001'
 
     const user = await fakeUsersRepository.create({
       email: 'example@mail.com',
@@ -41,8 +41,8 @@ describe('CreateAccountService', () => {
       category,
       balance,
       banking_institution_id,
-      banking_account,
-      banking_agency,
+      account_number,
+      agency_number,
       user_id: user.id,
       include_sum_on_dashboard: true,
     })
@@ -52,8 +52,8 @@ describe('CreateAccountService', () => {
     expect(account.category).toBe(category)
     expect(account.balance).toBe(balance)
     expect(account.banking_institution_id).toBe(banking_institution_id)
-    expect(account.banking_account).toBe(banking_account)
-    expect(account.banking_agency).toBe(banking_agency)
+    expect(account.account_number).toBe(account_number)
+    expect(account.agency_number).toBe(agency_number)
     expect(account.include_sum_on_dashboard).toBeTruthy()
   })
 
@@ -61,8 +61,8 @@ describe('CreateAccountService', () => {
     const name = 'Main Account'
     const banking_institution_id = '240'
     const category = 'Money'
-    const banking_agency = '0000'
-    const banking_account = '0000001'
+    const agency_number = '0000'
+    const account_number = '0000001'
 
     await expect(
       createAccountService.execute({
@@ -70,8 +70,8 @@ describe('CreateAccountService', () => {
         category,
         balance: 'wrong-balance-id',
         banking_institution_id,
-        banking_account,
-        banking_agency,
+        account_number,
+        agency_number,
         user_id: 'wrong-user-id',
         include_sum_on_dashboard: true,
       }),
@@ -89,8 +89,8 @@ describe('CreateAccountService', () => {
     const balance = '5000'
     const banking_institution_id = '240'
     const category = 'Money'
-    const banking_agency = '0000'
-    const banking_account = '0000001'
+    const agency_number = '0000'
+    const account_number = '0000001'
 
     await expect(
       createAccountService.execute({
@@ -98,8 +98,8 @@ describe('CreateAccountService', () => {
         category,
         balance,
         banking_institution_id,
-        banking_account,
-        banking_agency,
+        account_number,
+        agency_number,
         user_id: 'wrong-user-id',
         include_sum_on_dashboard: true,
       }),
@@ -111,8 +111,8 @@ describe('CreateAccountService', () => {
     const balance = '5000'
     const banking_institution_id = '240'
     const category = 'Money'
-    const banking_agency = '0000'
-    const banking_account = '0000001'
+    const agency_number = '0000'
+    const account_number = '0000001'
 
     const user = await fakeUsersRepository.create({
       email: 'example@mail.com',
@@ -125,8 +125,8 @@ describe('CreateAccountService', () => {
       category,
       balance,
       banking_institution_id,
-      banking_account,
-      banking_agency,
+      account_number,
+      agency_number,
       user_id: user.id,
       include_sum_on_dashboard: true,
     })
@@ -137,8 +137,8 @@ describe('CreateAccountService', () => {
         category,
         balance,
         banking_institution_id,
-        banking_account,
-        banking_agency,
+        account_number,
+        agency_number,
         user_id: user.id,
         include_sum_on_dashboard: true,
       }),

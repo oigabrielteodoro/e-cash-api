@@ -3,6 +3,7 @@ import { injectable, inject } from 'tsyringe'
 import { AppError } from '@/lib'
 import { UsersRepositoryProvider } from '@/app/core/users/types'
 import { AccountsRepositoryProvider } from '@/app/core/accounts/types'
+import { BankingInstitutionsRepositoryProvider } from '../../banking_institutions/types'
 
 @injectable()
 class ListAccountsByUserService {
@@ -12,6 +13,9 @@ class ListAccountsByUserService {
 
     @inject('AccountsRepository')
     private accountsRepository: AccountsRepositoryProvider,
+
+    @inject('BankingInstitutionsRepository')
+    private bankingInstitutionsRepository: BankingInstitutionsRepositoryProvider,
   ) {}
 
   public async execute(user_id: string) {
@@ -23,7 +27,12 @@ class ListAccountsByUserService {
 
     const accounts = await this.accountsRepository.findAllByUserId(user_id)
 
-    return accounts
+    return accounts.map((account) => ({
+      ...account,
+      banking_institution: this.bankingInstitutionsRepository.findById(
+        account.banking_institution_id,
+      ),
+    }))
   }
 }
 

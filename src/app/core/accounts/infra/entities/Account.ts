@@ -27,10 +27,10 @@ class Account {
   category: string
 
   @Column()
-  banking_agency: string
+  agency_number: string
 
   @Column()
-  banking_account: string
+  account_number: string
 
   @Column()
   include_sum_on_dashboard: boolean

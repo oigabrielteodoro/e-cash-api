@@ -6,6 +6,7 @@ import {
   RenewSessionUserService,
   LogOutUserService,
 } from '@/app/core/users/services'
+import { toSnakeCaseWithObject } from '@/lib'
 
 export class SessionsController {
   public async create(
@@ -38,7 +39,7 @@ export class SessionsController {
     response: Response,
     next: NextFunction,
   ): Promise<Response | void> {
-    const { user_id, session_id } = request.body
+    const { user_id, session_id } = toSnakeCaseWithObject(request.body)
 
     const renewSessionUser = container.resolve(RenewSessionUserService)
 
@@ -61,10 +62,8 @@ export class SessionsController {
     response: Response,
     next: NextFunction,
   ): Promise<Response | void> {
-    const {
-      user_id,
-      params: { session_id },
-    } = request
+    const user_id = request.user_id
+    const { session_id } = toSnakeCaseWithObject(request.params)
 
     const logOutUser = container.resolve(LogOutUserService)
 

@@ -27,5 +27,5 @@ export const createCategorySchema = {
 }
 
 export const deleteCategorySchema = {
-  category_id: Joi.string().uuid().required(),
+  categoryId: Joi.string().uuid().required(),
 }

@@ -37,6 +37,12 @@ class AccountsRepository implements AccountsRepositoryProvider {
       },
     })
   }
+
+  public async findBy(account: Partial<Account>) {
+    return this.ormRepository.findOne({
+      where: account,
+    })
+  }
 }
 
 export { AccountsRepository }
