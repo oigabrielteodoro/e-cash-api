@@ -4,6 +4,7 @@ import { errors as celebrateErrors } from 'celebrate'
 
 import { router } from './app/router'
 import { getErrors } from './lib/errors'
+import { transformCamelCase } from './app/interceptors'
 
 import './database'
 import './app/providers'
@@ -18,6 +19,7 @@ const whitelist = ['http://localhost:3000', 'https://ecash.vercel.app']
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+app.use(transformCamelCase())
 app.use(
   cors({
     origin: whitelist,

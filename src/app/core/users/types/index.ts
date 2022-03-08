@@ -37,10 +37,10 @@ export type AuthenticateResponse = {
 export const createUserSchema = {
   email: Joi.string().email().required(),
   password: Joi.string().required(),
-  full_name: Joi.string().required(),
-  financial_objective: Joi.string().required(),
-  monthly_income: Joi.string().required(),
-  like_be_called: Joi.string().required(),
+  fullName: Joi.string().required(),
+  financialObjective: Joi.string().required(),
+  monthlyIncome: Joi.string().required(),
+  likeBeCalled: Joi.string().required(),
 }
 
 export const authenticateUserSchema = {
@@ -49,16 +49,16 @@ export const authenticateUserSchema = {
 }
 
 export const updateUserProfileSchema = {
-  full_name: Joi.string(),
-  financial_objective: Joi.string(),
-  like_be_called: Joi.string(),
+  fullName: Joi.string(),
+  financialObjective: Joi.string(),
+  likeBeCalled: Joi.string(),
 }
 
 export const renewSessionUserSchema = {
-  user_id: Joi.string().uuid().required(),
-  session_id: Joi.string().uuid().required(),
+  userId: Joi.string().uuid().required(),
+  sessionId: Joi.string().uuid().required(),
 }
 
 export const logOutUserSchema = {
-  session_id: Joi.string().uuid().required(),
+  sessionId: Joi.string().uuid().required(),
 }

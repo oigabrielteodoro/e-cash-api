@@ -2,6 +2,7 @@ import { container } from 'tsyringe'
 import { NextFunction, Request, Response } from 'express'
 
 import { CreateUserService } from '@/app/core/users/services'
+import { toSnakeCaseWithObject } from '@/lib'
 
 class UsersController {
   public async create(
@@ -16,7 +17,7 @@ class UsersController {
       financial_objective,
       monthly_income,
       like_be_called,
-    } = request.body
+    } = toSnakeCaseWithObject(request.body)
 
     const createUser = container.resolve(CreateUserService)
 

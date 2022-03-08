@@ -5,6 +5,7 @@ import {
   ShowUserService,
   UpdateUserProfileService,
 } from '@/app/core/users/services'
+import { toSnakeCaseWithObject } from '@/lib'
 
 class ProfileController {
   public async show(request: Request, response: Response, next: NextFunction) {
@@ -27,7 +28,8 @@ class ProfileController {
     next: NextFunction,
   ): Promise<Response | void> {
     const { user_id, body } = request
-    const { like_be_called, full_name, financial_objective } = body
+    const { like_be_called, full_name, financial_objective } =
+      toSnakeCaseWithObject(body)
 
     const updateUserProfile = container.resolve(UpdateUserProfileService)
 

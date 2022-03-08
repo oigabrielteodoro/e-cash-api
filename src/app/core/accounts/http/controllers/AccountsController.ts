@@ -5,6 +5,7 @@ import {
   CreateAccountService,
   ListAccountsByUserService,
 } from '@/app/core/accounts/services'
+import { toSnakeCaseWithObject } from '@/lib'
 
 class AccountsController {
   public async index(request: Request, response: Response, next: NextFunction) {
@@ -26,7 +27,8 @@ class AccountsController {
     response: Response,
     next: NextFunction,
   ) {
-    const { user_id, body } = request
+    const user_id = request.user_id
+    const body = toSnakeCaseWithObject(request.body)
 
     const createAccount = container.resolve(CreateAccountService)
 

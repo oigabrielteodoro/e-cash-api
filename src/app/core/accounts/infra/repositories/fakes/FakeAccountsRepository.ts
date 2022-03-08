@@ -30,6 +30,10 @@ class FakeAccountsRepository implements AccountsRepositoryProvider {
 
     return accountsByUserId.find((account) => account.name === name)
   }
+
+  public async findBy(params: Partial<Account>) {
+    return this.accounts.find((account) => account === params)
+  }
 }
 
 export { FakeAccountsRepository }
