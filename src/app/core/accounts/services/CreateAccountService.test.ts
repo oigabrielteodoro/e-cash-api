@@ -150,4 +150,94 @@ describe('CreateAccountService', () => {
       ),
     )
   })
+
+  it('should not be able create bank account when user already other bank account with agency and institution', async () => {
+    const name = 'Main Account'
+    const balance = '5000'
+    const banking_institution_id = '240'
+    const category = 'Money'
+    const agency_number = '0001'
+    const account_number = '0000001'
+
+    const user = await fakeUsersRepository.create({
+      email: 'example@mail.com',
+      full_name: 'Example',
+      password: '@Strongpassword123',
+    })
+
+    await fakeAccountsRepository.create({
+      name,
+      category,
+      balance,
+      banking_institution_id,
+      account_number,
+      agency_number,
+      user_id: user.id,
+      include_sum_on_dashboard: true,
+    })
+
+    await expect(
+      createAccountService.execute({
+        name: 'Other-name',
+        category,
+        balance,
+        banking_institution_id,
+        account_number,
+        agency_number,
+        user_id: user.id,
+        include_sum_on_dashboard: true,
+      }),
+    ).rejects.toEqual(
+      new AppError(
+        'account.agency_number.in_use',
+        'Already exists bank account with agency and institution!',
+        409,
+      ),
+    )
+  })
+
+  it('should not be able create bank account when user already other bank account with account number', async () => {
+    const name = 'Main Account'
+    const balance = '5000'
+    const banking_institution_id = '240'
+    const category = 'Money'
+    const agency_number = '0001'
+    const account_number = '0000001'
+
+    const user = await fakeUsersRepository.create({
+      email: 'example@mail.com',
+      full_name: 'Example',
+      password: '@Strongpassword123',
+    })
+
+    await fakeAccountsRepository.create({
+      name,
+      category,
+      balance,
+      banking_institution_id,
+      account_number,
+      agency_number,
+      user_id: user.id,
+      include_sum_on_dashboard: true,
+    })
+
+    await expect(
+      createAccountService.execute({
+        name: 'Other-name',
+        category,
+        balance,
+        banking_institution_id: '210',
+        account_number,
+        agency_number,
+        user_id: user.id,
+        include_sum_on_dashboard: true,
+      }),
+    ).rejects.toEqual(
+      new AppError(
+        'account.account_number.in_use',
+        'Already exists bank account with account number!',
+        409,
+      ),
+    )
+  })
 })
