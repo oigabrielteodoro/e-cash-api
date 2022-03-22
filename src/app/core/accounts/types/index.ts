@@ -33,3 +33,7 @@ export const createAccountSchema = {
   agencyNumber: Joi.string().required(),
   accountNumber: Joi.string().required(),
 }
+
+export const deleteAccountSchema = {
+  accountId: Joi.string().uuid().required(),
+}

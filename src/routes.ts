@@ -10,6 +10,7 @@ export const UPDATE_USER_PROFILE = `${BASE_URL}/profile`
 
 export const LIST_ACCOUNTS = `${BASE_URL}/accounts`
 export const CREATE_ACCOUNT = `${BASE_URL}/accounts`
+export const DELETE_ACCOUNT = `${BASE_URL}/accounts/:accountId`
 
 export const LIST_CATEGORIES = `${BASE_URL}/categories`
 export const CREATE_CATEGORY = `${BASE_URL}/categories`
