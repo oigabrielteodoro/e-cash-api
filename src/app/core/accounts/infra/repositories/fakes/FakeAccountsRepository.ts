@@ -3,6 +3,7 @@ import {
   CreateAccount,
   AccountsRepositoryProvider,
 } from '@/app/core/accounts/types'
+import { isContains } from '@/lib/matcher'
 
 class FakeAccountsRepository implements AccountsRepositoryProvider {
   private accounts: Account[]
@@ -32,7 +33,11 @@ class FakeAccountsRepository implements AccountsRepositoryProvider {
   }
 
   public async findBy(params: Partial<Account>) {
-    return this.accounts.find((account) => account === params)
+    return this.accounts.find((account) => isContains(account, params))
+  }
+
+  public async delete(account_id: string) {
+    this.accounts = this.accounts.filter((account) => account.id !== account_id)
   }
 }
 

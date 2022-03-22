@@ -3,6 +3,7 @@ import { NextFunction, Request, Response } from 'express'
 
 import {
   CreateAccountService,
+  DeleteAccountService,
   ListAccountsByUserService,
 } from '@/app/core/accounts/services'
 import { toSnakeCaseWithObject } from '@/lib'
@@ -41,6 +42,28 @@ class AccountsController {
       return response.json({
         account,
       })
+    } catch (error) {
+      return next(error)
+    }
+  }
+
+  public async delete(
+    request: Request,
+    response: Response,
+    next: NextFunction,
+  ) {
+    const user_id = request.user_id
+    const { account_id } = toSnakeCaseWithObject(request.params)
+
+    const deleteAccount = container.resolve(DeleteAccountService)
+
+    try {
+      await deleteAccount.execute({
+        user_id,
+        account_id,
+      })
+
+      return response.status(204).send()
     } catch (error) {
       return next(error)
     }

@@ -43,6 +43,10 @@ class AccountsRepository implements AccountsRepositoryProvider {
       where: account,
     })
   }
+
+  public async delete(account_id: string) {
+    await this.ormRepository.delete(account_id)
+  }
 }
 
 export { AccountsRepository }

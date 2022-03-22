@@ -23,10 +23,9 @@ class CreateAccountService {
     balance,
     agency_number,
     account_number,
+    banking_institution_id,
     ...rest
   }: CreateAccount) {
-    console.log(user_id)
-
     if (!isValidNumber(balance)) {
       throw new AppError(
         'account.balance.invalid',
@@ -56,13 +55,14 @@ class CreateAccountService {
       {
         user_id,
         agency_number,
+        banking_institution_id,
       },
     )
 
     if (alreadyExistsAccountWithAgency) {
       throw new AppError(
-        'account.name.in_use',
-        'Already exists bank account with agency!',
+        'account.agency_number.in_use',
+        'Already exists bank account with agency and institution!',
         409,
       )
     }
@@ -75,8 +75,8 @@ class CreateAccountService {
 
     if (alreadyExistsAccountWithAccount) {
       throw new AppError(
-        'account.name.in_use',
-        'Already exists bank account with account!',
+        'account.account_number.in_use',
+        'Already exists bank account with account number!',
         409,
       )
     }
@@ -87,6 +87,7 @@ class CreateAccountService {
       balance,
       agency_number,
       account_number,
+      banking_institution_id,
       ...rest,
     })
 
